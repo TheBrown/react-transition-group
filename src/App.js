@@ -4,6 +4,8 @@ import data from './data/data';
 
 import Home from './Home';
 
+import { CSSTransition } from 'react-transition-group';
+
 class App extends Component {
 
   constructor(props) {
@@ -41,8 +43,14 @@ class App extends Component {
         <button onClick={() => this.toggleAppear()}>Appear: {`${appearHome}`}</button>
         <button onClick={() => this.nextProperty()} disabled={property.index === data.properties.length - 1}>next</button>
         <button onClick={() => this.prevProperty()} disabled={property.index === 0}>Prev</button>
-
-        <Home property={property}/>
+        <CSSTransition
+          in={appearHome}
+          appear={true}
+          timeout={600}
+          classNames="fade"
+        >
+          <Home property={property} />
+        </CSSTransition>
       </div>
     );
   }
